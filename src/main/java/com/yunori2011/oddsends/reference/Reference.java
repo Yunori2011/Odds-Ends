@@ -1,5 +1,7 @@
 package com.yunori2011.oddsends.reference;
 
+//A series of frequently used strings provided in its own class variable to be
+//easily referenced by other classes when needed.
 public class Reference
 {
     public static final String MOD_ID = "OddsEnds";

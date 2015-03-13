@@ -8,22 +8,20 @@ import java.io.File;
 
 public class ConfigurationHandler
 {
-    //Register config file object as variable
+    //Register config object as variable
     public static Configuration configuration;
 
     //Register config file values as variables at default settings
     public static boolean eioRecipes = true;
     public static boolean ic2MacRecipes = true;
     public static boolean teRecipes = true;
-    public static boolean OEDebug = true;
+    public static boolean OEDebug = false;
 
+    //Initial constructor method to be provided with the physical config file.
+    //If it is empty/doesn't exist, it will create it, and link to the next method.
     public static void init(File configFile)
     {
-    // Create the configuration object from the given configuration file
-    // if file does not exist already
-
-        if (configuration == null)
-        {
+        if (configuration == null) {
             configuration = new Configuration(configFile);
 
             //After config creation/init, load values from file into memory, even though first run
@@ -32,26 +30,29 @@ public class ConfigurationHandler
         }
     }
 
+    //Writes config options to file to file, or if they already exists, loads settings from file into memory.
     private static void loadConfiguration()
     {
-        //Load the current config file settings into memory
         eioRecipes = configuration.getBoolean("EIO recipes", Configuration.CATEGORY_GENERAL, true, "Enabled crafting of pure crystal dusts using the EIO SAG Mill. Does nothing without EIO installed.");
         ic2MacRecipes = configuration.getBoolean("IC2 Recipes", Configuration.CATEGORY_GENERAL, true, "Enabled crafting of pure crystal dusts using the IC2 Macerator. Does nothing without IC2 installed.");
         teRecipes = configuration.getBoolean("TE Recipes", Configuration.CATEGORY_GENERAL, true, "Enabled crafting of pure crystal dusts using the TE Pulverizer. Does nothing without TE installed.");
         OEDebug = configuration.getBoolean("Enable Debug", Configuration.CATEGORY_GENERAL, false, "Enable debugging. Will spam log, reccommended to be false.");
 
-        //If the config has changed, save changes to file, for GUI config
+        //If the config has changed, for example from a blank file to with information,
+        //writes the changes to the file. Also useful for GUI Config Editor during runtime.
         if (configuration.hasChanged())
         {
             configuration.save();
         }
     }
 
+    //Listens for Forge event detailing that a config file has changes, whether its from
+    //the GUI config changing something, or a difference in values from last load time.
+    // If the returned value is this mod's MOD_ID...
     @SubscribeEvent
     public void onConfigurationChangedEvent(ConfigChangedEvent.OnConfigChangedEvent event)
     {
-        //Checks if config has changed from FML Event
-        //if it has, reloads config options from file to memory
+        //...then reload the config file into memory.
         if (event.modID.equalsIgnoreCase(Reference.MOD_ID))
         {
             loadConfiguration();

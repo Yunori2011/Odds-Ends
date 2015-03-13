@@ -3,6 +3,9 @@ package com.yunori2011.oddsends.utility;
 import com.yunori2011.oddsends.reference.Reference;
 import cpw.mods.fml.common.FMLLog;
 import org.apache.logging.log4j.Level;
+
+//A series of easy to call log operations separated into their own access
+//class to be called throughout other areas as needed
 public class LogHelper
 {
     public static void log(Level logLevel, Object object)
