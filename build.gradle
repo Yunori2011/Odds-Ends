@@ -1,6 +1,10 @@
 buildscript {
+    configurations.all {
+        resolutionStrategy.cacheChangingModulesFor 0, 'seconds'
+    }
     repositories {
         mavenCentral()
+        mavenLocal()
         maven {
             name = "forge"
             url = "http://files.minecraftforge.net/maven"
@@ -17,47 +21,96 @@ buildscript {
 
 apply plugin: 'forge'
 
-version = "1.7.10-1.0"
-group= "com.yunori2011.oddsends" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
+version = "1.7.10-1.0.1"
+ext.versuffix = "mc1710"
+ext.apiVer = version
+
+group = "com.yunori2011.oddsends"
 archivesBaseName = "oddsends"
 
 minecraft {
     version = "1.7.10-10.13.2.1291"
-    runDir = "eclipse"
+}
+
+repositories {
+    mavenCentral()
+    maven {
+        name = "bdew"
+        url = "http://jenkins.bdew.net/maven"
+    }
+    maven {
+        name = "chickenbones"
+        url = "http://chickenbones.net/maven"
+    }
+    maven {
+        name = "ic2"
+        url = "http://maven.ic2.player.to/"
+    }
+    maven {
+        name "waila"
+        url "http://mobiusstrip.eu/maven"
+    }
 }
 
 dependencies {
-    // you may put jars on which you depend on in ./libs
-    // or you may define them like so..
-    //compile "some.group:artifact:version:classifier"
-    //compile "some.group:artifact:version"
-      
-    // real examples
-    //compile 'com.mod-buildcraft:buildcraft:6.0.8:dev'  // adds buildcraft to the dev env
-    //compile 'com.googlecode.efficient-java-matrix-library:ejml:0.24' // adds ejml to the dev env
-
-    // for more info...
-    // http://www.gradle.org/docs/current/userguide/artifact_dependencies_tutorial.html
-    // http://www.gradle.org/docs/current/userguide/dependency_management.html
-
+    compile "codechicken:NotEnoughItems:1.7.10-1.0.3.74:dev"
+    compile "codechicken:CodeChickenLib:1.7.10-1.1.1.110:dev"
+    compile "codechicken:CodeChickenCore:1.7.10-1.0.4.29:dev"
+    compile "mcp.mobius.waila:Waila:1.5.6a_1.7.10"
+    compile "net.industrial-craft:industrialcraft-2:2.2.691-experimental:api"
+    compile module("appeng:appliedenergistics2:rv2-beta-8:dev") {
+        transitive = false
+    }
 }
 
-processResources
-{
-    // this will ensure that this task is redone when the versions change.
-    inputs.property "version", project.version
-    inputs.property "mcversion", project.minecraft.version
+import org.apache.tools.ant.filters.ReplaceTokens
 
-    // replace stuff in mcmod.info, nothing else
+processResources {
+    inputs.property "tokens", minecraft.replacements
     from(sourceSets.main.resources.srcDirs) {
         include 'mcmod.info'
-                
-        // replace version and mcversion
-        expand 'version':project.version, 'mcversion':project.minecraft.version
+        filter(ReplaceTokens, tokens: minecraft.replacements)
     }
-        
-    // copy everything else, thats not the mcmod.info
+
     from(sourceSets.main.resources.srcDirs) {
         exclude 'mcmod.info'
+    }
+}
+
+task sourceJar(type: Jar) {
+}
+
+task deobfJar(type: Jar) {
+    from sourceSets.main.output.classesDir
+    exclude "**/*.psd"
+}
+
+
+jar {
+    exclude "**/*.psd"
+    appendix = project.versuffix
+}
+
+artifacts {
+    archives sourceJar
+    archives deobfJar
+}
+
+apply plugin: 'maven-publish'
+
+publishing {
+    publications {
+        maven(MavenPublication) {
+            artifact deobfJar
+
+            artifact sourceJar {
+                classifier "sources"
+            }
+       }
+    }
+    repositories {
+        maven {
+            url "file://var/www/maven"
+        }
     }
 }

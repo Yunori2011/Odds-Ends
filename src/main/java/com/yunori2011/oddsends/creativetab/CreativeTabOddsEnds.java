@@ -11,22 +11,13 @@ public class CreativeTabOddsEnds
     //or simple to implement
     //Provides creative tab variable as per constructor. When initialising
     //a CreativeTabs variable, you have to provide a MOD_ID
-    public static final CreativeTabs OddTab = new CreativeTabs(Reference.MOD_ID)
+    public static final CreativeTabs OddTab = new CreativeTabs(Reference.MOD_ID.toLowerCase())
     {
         //Provides item with texture to assign to the creative tab's texture.
         @Override
         public Item getTabIconItem()
         {
             return ModItems.pureCertusDust;
-        }
-
-        //Sets tooltip for creative tab. This method is currently
-        //incorrect in its labeling, due to the hardcoded nature of the
-        //string within. Might fix at some point, for good practice's sake.
-        @Override
-        public String getTranslatedTabLabel()
-        {
-            return "Odds&Ends";
         }
     };
 }
