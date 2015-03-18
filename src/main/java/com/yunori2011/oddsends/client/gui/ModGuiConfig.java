@@ -17,7 +17,7 @@ public class ModGuiConfig extends GuiConfig
     public ModGuiConfig(GuiScreen guiScreen)
     {
         //Uses super() to provide the argument to the constructor method with the method itself
-        //Format is Config Catagory, MOD_ID, requires world restart, requires minecraft restart, path to config file.
+        //Format is String:Config Category, String:MOD_ID, Bool:requires world restart, Bool:requires minecraft restart, String:path to config file.
         super(guiScreen,
                 new ConfigElement(ConfigurationHandler.configuration.getCategory(Configuration.CATEGORY_GENERAL)).getChildElements(),
                 Reference.MOD_ID,

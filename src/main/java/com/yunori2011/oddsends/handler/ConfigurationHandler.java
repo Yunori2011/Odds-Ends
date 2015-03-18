@@ -19,6 +19,9 @@ public class ConfigurationHandler
 
     //Initial constructor method to be provided with the physical config file.
     //If it is empty/doesn't exist, it will create it, and link to the next method.
+    //It should always be == null when loading in preinit, as I don't register to object
+    //to the file until when this init method is called and passed the config file
+    //in preinit.
     public static void init(File configFile)
     {
         if (configuration == null) {
@@ -33,6 +36,8 @@ public class ConfigurationHandler
     //Writes config options to file to file, or if they already exists, loads settings from file into memory.
     private static void loadConfiguration()
     {
+        //EIO option removed from config until I can figure out how to pass EIO Recipes easily.
+
         //eioRecipes = configuration.getBoolean("EIO recipes", Configuration.CATEGORY_GENERAL, true, "Enabled crafting of pure crystal dusts using the EIO SAG Mill. Does nothing without EIO installed.");
         ic2MacRecipes = configuration.getBoolean("IC2 Recipes", Configuration.CATEGORY_GENERAL, true, "Enabled crafting of pure crystal dusts using the IC2 Macerator. Does nothing without IC2 installed.");
         teRecipes = configuration.getBoolean("TE Recipes", Configuration.CATEGORY_GENERAL, true, "Enabled crafting of pure crystal dusts using the TE Pulverizer. Does nothing without TE installed.");

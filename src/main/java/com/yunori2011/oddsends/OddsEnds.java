@@ -22,6 +22,7 @@ import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 public class OddsEnds
 {
     public static boolean isAELoaded = false;
+    public static boolean isECLoaded = false;
     public static boolean isEIOLoaded = false;
     public static boolean isIC2Loaded = false;
     public static boolean isTELoaded = false;
@@ -72,12 +73,12 @@ public class OddsEnds
             isAELoaded = true;
         }
 
-        if(Loader.isModLoaded("ThermalExpansion"))
+        if(Loader.isModLoaded("extracells"))
         {
-            isTELoaded = true;
+            isECLoaded = true;
         }
 
-        if(Loader.isModLoaded("EnderIO"))
+        if(Loader.isModLoaded("EnderEnderIO"))
         {
             isEIOLoaded = true;
         }
@@ -87,11 +88,21 @@ public class OddsEnds
             isIC2Loaded = true;
         }
 
+        if(Loader.isModLoaded("ThermalExpansion"))
+        {
+            isTELoaded = true;
+        }
+
         //Register required recipe action regardless of loaded mods and configs
         Recipes.init();
         if(isAELoaded == true)
         {
             Recipes.initAE();
+
+            if(isECLoaded == true)
+            {
+                Recipes.initEC();
+            }
 
             /*if(ConfigurationHandler.eioRecipes == true && isEIOLoaded == true)
             {

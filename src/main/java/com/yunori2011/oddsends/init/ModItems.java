@@ -1,9 +1,6 @@
 package com.yunori2011.oddsends.init;
 
-import com.yunori2011.oddsends.item.ItemOddType;
-import com.yunori2011.oddsends.item.ItemPureCertusDust;
-import com.yunori2011.oddsends.item.ItemPureFluixDust;
-import com.yunori2011.oddsends.item.ItemPureNetherDust;
+import com.yunori2011.oddsends.item.*;
 import com.yunori2011.oddsends.reference.Reference;
 import cpw.mods.fml.common.registry.GameRegistry;
 
@@ -18,6 +15,8 @@ public class ModItems
     public static final ItemOddType pureCertusDust = new ItemPureCertusDust();
     public static final ItemOddType pureNetherDust = new ItemPureNetherDust();
     public static final ItemOddType pureFluixDust = new ItemPureFluixDust();
+    public static final ItemOddType pureChargedCertusCrystal = new ItemPureChargedCertusCrystal();
+    public static final ItemOddType oddSilicon = new ItemOddSilicon();
 
     //Constructor to add previously made objects to game
     public static void init()
@@ -27,5 +26,7 @@ public class ModItems
         GameRegistry.registerItem(pureCertusDust, "pureCertusDust");
         GameRegistry.registerItem(pureNetherDust, "pureNetherDust");
         GameRegistry.registerItem(pureFluixDust, "pureFluixDust");
+        GameRegistry.registerItem(pureChargedCertusCrystal, "pureChargedCertusCrystal");
+        GameRegistry.registerItem(oddSilicon, "oddSilicon");
     }
 }

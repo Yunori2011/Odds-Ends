@@ -2,6 +2,8 @@ itemGroup.oddsends=Odds&Ends
 
 item.oddsends:pureCertusDust.name=Pure Certus Dust
 item.oddsends:pureFluixDust.name=Pure Fluix Dust
-item.oddsends:pureNetherDust.name=Pure Nether Dust
+item.oddsends:pureNetherDust.name=Pure Nether Quartz Dust
+item.oddsends:pureChargedCertusCrystal.name=Pure Charged Certus Quartz Crystal
+item.oddsends:oddSilicon.name=Odd Silicon
 
 tile.oddsends:BlockCopper.name=Copper Block

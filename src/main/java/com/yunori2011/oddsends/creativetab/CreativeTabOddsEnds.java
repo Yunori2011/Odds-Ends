@@ -9,6 +9,7 @@ public class CreativeTabOddsEnds
 {
     //Creates a basic creative tab, not sure if actually basic and barebones,
     //or simple to implement
+
     //Provides creative tab variable as per constructor. When initialising
     //a CreativeTabs variable, you have to provide a MOD_ID
     public static final CreativeTabs OddTab = new CreativeTabs(Reference.MOD_ID.toLowerCase())

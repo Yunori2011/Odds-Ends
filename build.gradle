@@ -21,7 +21,7 @@ buildscript {
 
 apply plugin: 'forge'
 
-version = "1.7.10-1.0.1"
+version = "1.0"
 ext.versuffix = "mc1710"
 ext.apiVer = version
 
@@ -58,6 +58,7 @@ dependencies {
     compile "codechicken:CodeChickenCore:1.7.10-1.0.4.29:dev"
     compile "mcp.mobius.waila:Waila:1.5.6a_1.7.10"
     compile "net.industrial-craft:industrialcraft-2:2.2.691-experimental:api"
+	compile files ("C:/Users/Yunori/Documents/Modding/Minecraft/1-7-10/ExtraCells-deobf-1.7.10-2.2.59b89.jar")
     compile module("appeng:appliedenergistics2:rv2-beta-8:dev") {
         transitive = false
     }
