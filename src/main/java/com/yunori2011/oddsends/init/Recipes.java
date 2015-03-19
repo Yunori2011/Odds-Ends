@@ -177,7 +177,7 @@ public class Recipes extends TERecipeHelper
     @Optional.Method(modid = "extracells")
     public static void initEC()
     {
-        ItemStack AEGoldCPU = AEApi.instance().materials().materialCalcProcessor.stack(1).copy();
+        ItemStack AEGoldCPU = AEApi.instance().materials().materialLogicProcessor.stack(1).copy();
         ItemStack AEAniCore = AEApi.instance().materials().materialAnnihilationCore.stack(1).copy();
         ItemStack AEFormCore = AEApi.instance().materials().materialFormationCore.stack(1).copy();
         ItemStack AEQuartzGlass = AEApi.instance().blocks().blockQuartzGlass.stack(1).copy();
